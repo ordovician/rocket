@@ -1,21 +1,23 @@
 package parts
 
-type Newton float64
-type Kg float64
+import . "github.com/ordovician/rockets/physics"
 
-type Body interface {
+// Something that has mass
+type Part interface {
 	Mass() Kg
 }
 
 // A tank to hold rocket propellant
 type Tank interface {
-	Body
+	Part
 	IsEmpty() bool
 	Consume(amount Kg) Kg
 	Refill()
 }
 
+// A rocket engine
 type Engine interface {
-	Body
-	Thrust() Newton
+	Part
+	Thrust() Newton // Power of engine. How much it pushes
+	Isp() float64   // Specific impulse. Fuel efficiency of engine
 }

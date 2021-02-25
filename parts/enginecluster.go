@@ -1,16 +1,18 @@
 package parts
 
+import . "github.com/ordovician/rockets/physics"
+
 type EngineCluster struct {
-	engine Engine
-	count  uint8
+	Engine
+	count uint8
 }
 
 func (cluster *EngineCluster) Mass() Kg {
-	return cluster.engine.Mass() * Kg(cluster.count)
+	return cluster.Engine.Mass() * Kg(cluster.count)
 }
 
 func (cluster *EngineCluster) Thrust() Newton {
-	return cluster.engine.Thrust() * Newton(cluster.count)
+	return cluster.Engine.Thrust() * Newton(cluster.count)
 }
 
 func NewEngineCluster(engine Engine, count uint8) Engine {

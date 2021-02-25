@@ -1,5 +1,7 @@
 package parts
 
+import . "github.com/ordovician/rockets/physics"
+
 const (
 	largeDryMass   = 950
 	largeTotalMass = 10200

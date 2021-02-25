@@ -1,5 +1,7 @@
 package parts
 
+import . "github.com/ordovician/rockets/physics"
+
 const (
 	mediumDryMass   = 250
 	mediumTotalMass = 2300
