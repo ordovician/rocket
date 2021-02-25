@@ -3,8 +3,8 @@ package parts
 import . "github.com/ordovician/rockets/physics"
 
 const (
-	mediumDryMass   = 250
-	mediumTotalMass = 2300
+	mediumDryMass   = 250.0
+	mediumTotalMass = 2300.0
 )
 
 // A medium sized rocket tank
