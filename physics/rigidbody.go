@@ -10,18 +10,20 @@ type RigidBody struct {
 	Mass      Kg
 }
 
-func NewRigidBody(mass Kg, force Newton) *RigidBody {
-	body := RigidBody{0, 0, force, mass}
-	return &body
+// The force of gravity on the rigid body.
+func (body *RigidBody) GravityForce() Newton {
+	return Newton(-Gravity * float64(body.Mass))
 }
 
-func (body *RigidBody) GravityForce() float64 {
-	return -Gravity * float64(body.Mass)
-}
-
+// Acceleration of of this body upwards.
+// Gravity is defined as causing downward acceleration.
 func (body *RigidBody) Acceleration() float64 {
 	return float64(body.Force) / float64(body.Mass)
 }
 
+// Perform one integration step using the explict euler method. This will update
+// the position and velocity of the body by advancing the time with Δt.
 func (body *RigidBody) Integrate(Δt float64) {
+	body.Elevation += body.Velocity * Δt
+	body.Velocity += body.Acceleration() * Δt
 }

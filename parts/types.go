@@ -1,6 +1,6 @@
 package parts
 
-import . "github.com/ordovician/rockets/physics"
+import . "github.com/ordovician/rocket/physics"
 
 // Something that has mass
 type Part interface {
@@ -10,6 +10,7 @@ type Part interface {
 // A tank to hold rocket propellant
 type Tank interface {
 	Part
+	Propellant() Kg
 	IsEmpty() bool
 	Consume(amount Kg) Kg
 	Refill()

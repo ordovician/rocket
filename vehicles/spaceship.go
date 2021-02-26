@@ -1,55 +1,70 @@
 package vehicles
 
-import . "github.com/ordovician/rockets/physics"
-import . "github.com/ordovician/rockets/parts"
+import . "github.com/ordovician/rocket/physics"
 
 type SpaceVehicle struct {
-	ActiveStage StagedRocket
+	Rocket
 	RigidBody
+}
+
+func NewSpaceVehicle(rocket Rocket) *SpaceVehicle {
+	rigidBody := RigidBody{Mass: rocket.Mass(), Force: 0}
+	ship := SpaceVehicle{rocket, rigidBody}
+	return &ship
 }
 
 // Update propellant and elevantion of space vehicle
 func (ship *SpaceVehicle) Update(Δt float64) {
-	stage := ship.ActiveStage
+	stage := ship.Rocket
 	stage.Update(Δt) // consume fuel. Affects mass
-	ship.RigidBody.Mass = stage.Mass()
-	ship.RigidBody.Force = stage.Thrust()
-	ship.RigidBody.Integrate(Δt)
+	body := &ship.RigidBody
+	body.Mass = stage.Mass()
+	body.Force = stage.Thrust()
+	body.Force -= body.GravityForce()
+	body.Integrate(Δt)
 }
 
-func NewSpaceVehicle(payload Part, tank Tank, engine Engine) *SpaceVehicle {
-	rocket := NewSingleRocket(tank, engine)
-	rocket.Payload = payload
-
-	stage := StagedRocket{nil, *rocket}
-	rigidBody := NewRigidBody(stage.Mass(), 0)
-	ship := SpaceVehicle{stage, *rigidBody}
-	return &ship
+func (ship *SpaceVehicle) Mass() Kg {
+	return ship.Rocket.Mass()
 }
 
-func NewStagedRocket(stages []Rocket) *SpaceVehicle {
-
-	// for i, stage := range stages {
-	//
-	// }
-	return new(SpaceVehicle)
+// Dump the bottom stage of the multi-stage rocket
+// What was the payload of the previous bottom stage becomes the
+// new bottom stage. This action means the mass of the whole ship is reduced
+// and it gets a new value for thrust derived from whatever engine is attached to the
+// new active stage.
+func (ship *SpaceVehicle) StageSeparate() Rocket {
+	stage := ship.Rocket.StageSeparate()
+	ship.Rocket = stage
+	return stage
 }
 
-func (ship *SpaceVehicle) Launch(Δt, max_duration float64) {
-	stage := &ship.ActiveStage
-	for t := 0.0; t < max_duration; t += Δt {
-		if stage == nil {
-			return
-		}
+// Simulate a launch of a space vehicle (a multi-stage rocket). The simulation
+// is performed in time steps which are Δt long each. Simulation lasts maximum max_duration.
+// In the simulation one stage will consume its fuel before being detached and the next stage take over
+// Returns the elevation reached by rocket.
+func (ship *SpaceVehicle) Launch(Δt, max_duration float64, monitor LaunchMonitor) float64 {
 
-		stage.Update(Δt)
+	for t := 0.0; t <= max_duration; t += Δt {
+		ship.Update(Δt)
 
-		if stage.IsEmpty() {
-			stage = ship.StageSeparate()
+		if ship.Rocket.IsEmpty() {
+			if ship.NoStages() == 1 {
+				break
+			}
+
+			stage := ship.StageSeparate()
+
+			// tell the world that a stage got separated and when it happened
+			if monitor != nil {
+				monitor(t)
+			}
+
+			// no more stages left, so we cannot keep flying
+			if stage == nil {
+				break
+			}
 		}
 	}
-}
-
-func (ship *SpaceVehicle) StageSeparate() *StagedRocket {
-	return nil
+	return ship.RigidBody.Elevation
 }

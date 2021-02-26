@@ -1,23 +1,26 @@
 package parts
 
-import . "github.com/ordovician/rockets/physics"
+import . "github.com/ordovician/rocket/physics"
 
+// A rocket engine with an electrical turbo pump used in the Electron rocket
+// developed by Rocket Labs in New Zealand.
 type Rutherford struct {
 }
 
-func (engine *Rutherford) Mass() Kg {
+// The mass of the rocket engine.
+func (engine Rutherford) Mass() Kg {
 	return 35
 }
 
-func (engine *Rutherford) Thrust() Newton {
+// Thrust is the force produced when the rocket is firing.
+// Think of this as similar to the horse power of a car.
+func (engine Rutherford) Thrust() Newton {
 	return 25000
 }
 
-func (engine *Rutherford) Isp() float64 {
+// Specific impulse of the rocket engine. This is a measure of fuel efficiency.
+// This of this as the milage of a car. But instead of miles rocket engine
+// efficiency is thought of in terms of how much the velocity of the rocket can be altered.
+func (engine Rutherford) Isp() float64 {
 	return 311
-}
-
-func NewRutherford() Engine {
-	engine := Rutherford{}
-	return &engine
 }

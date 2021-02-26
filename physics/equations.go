@@ -1,6 +1,9 @@
 package physics
 
+// A unit for force. The force that causes 1 Kg to move 1 meter in one second.
 type Newton float64
+
+// Standard measurement unit for mass, a kilogram.
 type Kg float64
 
 const (
