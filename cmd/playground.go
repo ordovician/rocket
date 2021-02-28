@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"rockets/physics"
+	"github.com/ordovician/rocket/physics"
 )
 
 func main() {

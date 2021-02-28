@@ -1,4 +1,4 @@
-package vehicles
+package rocket
 
 import . "github.com/ordovician/rocket/parts"
 

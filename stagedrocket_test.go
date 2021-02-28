@@ -1,4 +1,4 @@
-package vehicles
+package rocket
 
 import (
 	. "rockets/parts"
@@ -11,7 +11,7 @@ func newElectronSpaceVehicle() *SpaceVehicle {
 
 	craft := NewSpaceCraft(nil, NewMediumTank(), rutherford)
 
-	booster := NewStagedRocket(
+	booster := NewMultiStaged(
 		craft,
 		NewLargeTank(),
 		&boosterEngines)
@@ -26,7 +26,7 @@ func TestRocketTankEmptying(tst *testing.T) {
 
 	craft := NewSpaceCraft(nil, NewMediumTank(), rutherford)
 
-	booster := NewStagedRocket(
+	booster := NewMultiStaged(
 		craft,
 		NewLargeTank(),
 		&boosterEngines)

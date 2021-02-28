@@ -1,4 +1,4 @@
-package vehicles
+package rocket
 
 import (
 	"fmt"
@@ -8,11 +8,11 @@ import (
 // Shows how total mass and thrust will change when you do stage separation.
 // This happens because you knock off the last part. What used to be the payload of
 // the bottom part thus becomes the remaining part, and its engine provides the new thrust.
-func ExampleStagedRocket_StageSeparate() {
+func ExampleMultiStaged_StageSeparate() {
 	rutherford := Rutherford{}
 	boosterEngines := EngineCluster{rutherford, 9}
 
-	booster := NewStagedRocket(
+	booster := NewMultiStaged(
 		NewSpaceCraft(nil, NewMediumTank(), rutherford),
 		NewLargeTank(),
 		&boosterEngines)
@@ -41,7 +41,7 @@ func ExampleSpaceVehicle_Launch() {
 	rutherford := Rutherford{}
 	boosterEngines := EngineCluster{rutherford, 9}
 
-	booster := NewStagedRocket(
+	booster := NewMultiStaged(
 		NewSpaceCraft(nil, NewMediumTank(), rutherford),
 		NewLargeTank(),
 		&boosterEngines)
@@ -85,7 +85,7 @@ func ExampleTankPropellant() {
 
 	craft := NewSpaceCraft(nil, NewMediumTank(), rutherford)
 
-	booster := NewStagedRocket(
+	booster := NewMultiStaged(
 		craft,
 		NewLargeTank(),
 		&boosterEngines)
