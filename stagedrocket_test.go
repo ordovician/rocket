@@ -1,7 +1,7 @@
 package rocket
 
 import (
-	. "rockets/parts"
+	. "github.com/ordovician/rocket/parts"
 	"testing"
 )
 
@@ -18,27 +18,6 @@ func newElectronSpaceVehicle() *SpaceVehicle {
 
 	ship := NewSpaceVehicle(booster)
 	return ship
-}
-
-func TestRocketTankEmptying(tst *testing.T) {
-	rutherford := Rutherford{}
-	boosterEngines := EngineCluster{rutherford, 9}
-
-	craft := NewSpaceCraft(nil, NewMediumTank(), rutherford)
-
-	booster := NewMultiStaged(
-		craft,
-		NewLargeTank(),
-		&boosterEngines)
-
-	ship := NewSpaceVehicle(booster)
-
-	mediumTank := craft.Tank
-	largeTank := booster.Tank
-
-	if body.Velocity != 0.5 {
-		test.Errorf("Got %f but wanted %f", body.Velocity, 0.5)
-	}
 }
 
 func TestStageSeparation(tst *testing.T) {
