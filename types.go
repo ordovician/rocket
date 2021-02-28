@@ -1,6 +1,6 @@
 package rocket
 
-import . "github.com/ordovician/rocket/parts"
+import . "github.com/ordovician/rocket/part"
 
 // A rocket is made up of some kind payload, a propellant tank and a rocket engine.
 // This is a composite structure. The payload could potentially be another rocket

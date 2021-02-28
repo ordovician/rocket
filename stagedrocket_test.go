@@ -1,7 +1,7 @@
 package rocket
 
 import (
-	. "github.com/ordovician/rocket/parts"
+	. "github.com/ordovician/rocket/part"
 	"testing"
 )
 

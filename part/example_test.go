@@ -1,8 +1,10 @@
-package parts
+package part
 
 import "fmt"
 
-func ExampleElectronBoosterEngines() {
+// Creating a cluster of nine Rutherford engines. Shows how e.g.
+// thrust gets combined but specific impulse (Isp) stays the same.
+func ExampleEngineCluster() {
 	cluster := EngineCluster{Rutherford{}, 9}
 	fmt.Println("Mass: ", cluster.Mass())
 	fmt.Println("Thrust: ", cluster.Thrust())

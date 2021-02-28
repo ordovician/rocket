@@ -2,7 +2,7 @@ package rocket
 
 import (
 	"fmt"
-	. "github.com/ordovician/rocket/parts"
+	. "github.com/ordovician/rocket/part"
 )
 
 // Shows how total mass and thrust will change when you do stage separation.

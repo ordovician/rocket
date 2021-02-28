@@ -4,7 +4,7 @@ import (
 	"sort"
 
 	"testing"
-	// "parts"
+	// "part"
 )
 
 func compare(test *testing.T, b *RigidBody, tmax, wanted float64) {
