@@ -25,7 +25,7 @@ func (ship *SpaceVehicle) Update(Δt float64) {
 	body := &ship.RigidBody
 	body.Mass = stage.Mass()
 	body.Force = stage.Thrust()
-	body.Force -= body.GravityForce()
+	body.Force += body.GravityForce()
 	body.Integrate(Δt)
 }
 
@@ -52,9 +52,9 @@ func (ship *SpaceVehicle) StageSeparate() Rocket {
 //
 // Returns the time in seconds when the all the fuel ran out or we reached max duration along
 // with the elevation achieved at that time
-func (ship *SpaceVehicle) Launch(Δt, max_duration float64, monitor LaunchMonitor) (t, elevation float64) {
+func (ship *SpaceVehicle) Launch(Δt, maxDuration float64, monitor LaunchMonitor) (t, elevation float64) {
 	t = 0.0
-	for ; t <= max_duration; t += Δt {
+	for ; t <= maxDuration; t += Δt {
 		ship.Update(Δt)
 
 		if ship.Rocket.IsEmpty() {

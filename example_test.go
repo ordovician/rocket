@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	. "github.com/ordovician/rocket/part"
+	// . "github.com/ordovician/rocket/physics"
 )
 
 // Shows how total mass and thrust will change when you do stage separation.
@@ -70,12 +71,12 @@ func ExampleSpaceVehicle_Launch() {
 	//   No. stages =  2
 	//   Booster propellant =  9250 Kg
 	// Stage separation at t = 125.3 s
-	//   elevation = 270.0 km
+	//   elevation = 115.9 km
 	//   ship mass = 2335.0 Kg
 	//   propellant = 2050.0 Kg
 	//   stages left =  1
 	// After launch, ship mass =  285.0 Kg
-	//   elevation = 2395.2 km
+	//   elevation = 1012.8 km
 	//   Stages left =  1
 	//   Propellant left =  0 Kg
 }
@@ -114,22 +115,14 @@ func ExampleTankPropellant() {
 }
 
 func ExampleSpaceVehicle_Update() {
-	engine := NewFlexiEngine(0.0, 75, 5)
-	tank := NewFlexiTank(0.0, 20)
-	probe := NewProbe(9.8)
 
-	craft := NewSpaceCraft(probe, tank, engine)
-	ship := NewSpaceVehicle(craft)
-
-	Δt := 0.4
-	for t := 0.0; t <= 800; t += Δt {
-		ship.Update(Δt)
-		fmt.Printf("t: %.2f, elevation: %.2f, prop: %.2f\n", t, ship.Elevation, ship.Propellant())
-		if ship.IsEmpty() {
-			break
-		}
+	for _, Isp := range []float64{1, 10, 100} {
+		t, elevation, propellant := launchSpaceShip(200, 1000, Isp)
+		fmt.Printf("Isp: %.2f, t: %.2f s, elevation: %.2f km, prop: %.2f Kg\n", Isp, t, elevation/1e3, propellant)
 	}
 
 	// Output:
-	// booger
+	// Isp: 1.00, t: 1.60 s, elevation: 0.00 km, prop: 0.00 Kg
+	// Isp: 10.00, t: 19.60 s, elevation: 1.30 km, prop: 0.00 Kg
+	// Isp: 100.00, t: 196.00 s, elevation: 5.89 km, prop: 0.00 Kg
 }
