@@ -2,11 +2,16 @@ package rocket
 
 import . "github.com/ordovician/rocket/physics"
 
+// SpaceVehicle is a multi-staged rocket which can be launched from planetary surface and into orbit.
+// It is potentially made up of many Rocket parts. A rocket can contain a rocket as a payload.
+// The Rocket type alone only deals with mass and thrust. A SpaceVehicle can keep track of latitude.
+// You need a SpaceVehicle to simulate a rocket launch, as a Rocket alone does not contain physics calculations.
 type SpaceVehicle struct {
 	Rocket
 	RigidBody
 }
 
+// NewSpaceVehicle creates a space vehicle from a single or multi-staged rocket.
 func NewSpaceVehicle(rocket Rocket) *SpaceVehicle {
 	rigidBody := RigidBody{Mass: rocket.Mass(), Force: 0}
 	ship := SpaceVehicle{rocket, rigidBody}
@@ -24,12 +29,13 @@ func (ship *SpaceVehicle) Update(Δt float64) {
 	body.Integrate(Δt)
 }
 
+// Mass of the whole space vehicle measured in Kg.
 func (ship *SpaceVehicle) Mass() Kg {
 	return ship.Rocket.Mass()
 }
 
-// Dump the bottom stage of the multi-stage rocket
-// What was the payload of the previous bottom stage becomes the
+// StageSeparate the space vehicle. This means dumping the bottom stage of
+// a multi-stage rocket. What was the payload of the previous bottom stage becomes the
 // new bottom stage. This action means the mass of the whole ship is reduced
 // and it gets a new value for thrust derived from whatever engine is attached to the
 // new active stage.
@@ -39,9 +45,10 @@ func (ship *SpaceVehicle) StageSeparate() Rocket {
 	return stage
 }
 
-// Simulate a launch of a space vehicle (a multi-stage rocket). The simulation
-// is performed in time steps which are Δt long each. Simulation lasts maximum max_duration.
-// In the simulation one stage will consume its fuel before being detached and the next stage take over
+// Launch a space vehicle into space. The launch is simulated with time incremenets of Δt.
+// Simulation lasts maximum max_duration. Smaller values for Δt gives more accurate simulation but
+// requires more computations. In the simulation one stage will consume its fuel
+// before being detached and the next stage take over
 //
 // Returns the time in seconds when the all the fuel ran out or we reached max duration along
 // with the elevation achieved at that time

@@ -2,6 +2,7 @@ package rocket
 
 import (
 	"fmt"
+
 	. "github.com/ordovician/rocket/part"
 )
 
@@ -110,4 +111,25 @@ func ExampleTankPropellant() {
 	// Medium tank propellant:  2050
 	// Stage separation
 	// Ship tank propellant:  2050
+}
+
+func ExampleSpaceVehicle_Update() {
+	engine := NewFlexiEngine(0.0, 75, 5)
+	tank := NewFlexiTank(0.0, 20)
+	probe := NewProbe(9.8)
+
+	craft := NewSpaceCraft(probe, tank, engine)
+	ship := NewSpaceVehicle(craft)
+
+	Δt := 0.4
+	for t := 0.0; t <= 800; t += Δt {
+		ship.Update(Δt)
+		fmt.Printf("t: %.2f, elevation: %.2f, prop: %.2f\n", t, ship.Elevation, ship.Propellant())
+		if ship.IsEmpty() {
+			break
+		}
+	}
+
+	// Output:
+	// booger
 }
