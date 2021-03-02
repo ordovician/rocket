@@ -36,3 +36,7 @@ func TestStageSeparation(tst *testing.T) {
 		tst.Errorf("Got %f but wanted %f", ship.Propellant(), mediumTank.Propellant())
 	}
 }
+
+func TestSimpleLaunch() {
+
+}

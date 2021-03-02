@@ -42,10 +42,12 @@ func (ship *SpaceVehicle) StageSeparate() Rocket {
 // Simulate a launch of a space vehicle (a multi-stage rocket). The simulation
 // is performed in time steps which are Δt long each. Simulation lasts maximum max_duration.
 // In the simulation one stage will consume its fuel before being detached and the next stage take over
-// Returns the elevation reached by rocket.
-func (ship *SpaceVehicle) Launch(Δt, max_duration float64, monitor LaunchMonitor) float64 {
-
-	for t := 0.0; t <= max_duration; t += Δt {
+//
+// Returns the time in seconds when the all the fuel ran out or we reached max duration along
+// with the elevation achieved at that time
+func (ship *SpaceVehicle) Launch(Δt, max_duration float64, monitor LaunchMonitor) (t, elevation float64) {
+	t = 0.0
+	for ; t <= max_duration; t += Δt {
 		ship.Update(Δt)
 
 		if ship.Rocket.IsEmpty() {
@@ -66,5 +68,5 @@ func (ship *SpaceVehicle) Launch(Δt, max_duration float64, monitor LaunchMonito
 			}
 		}
 	}
-	return ship.RigidBody.Elevation
+	return t, ship.RigidBody.Elevation
 }
