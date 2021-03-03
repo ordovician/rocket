@@ -55,3 +55,23 @@ func TestPlentyPowerful(tst *testing.T) {
 		tst.Errorf("Got elevation = %.3f, want elevation > %.3f", elevation, threshold)
 	}
 }
+
+// We can calculate distance with Newton equations. In these mass will not change which means you should expect shorter elevation
+// achieved with the same starting mass.
+func TestCompareWithNewtonMotionEquations(tst *testing.T) {
+	var mass Kg = 1331
+	var Isp float64 = 42
+	thrust := Newton(float64(mass) * Gravity)
+
+	t, elevation, _ := launchSpaceShip(mass, thrust, Isp)
+
+	gravityForce := Newton(float64(mass) * Gravity)
+	force := thrust - gravityForce
+	accel := float64(force) / float64(mass)
+
+	distance := Distance(0, 0, accel)
+
+	if distance(t) > elevation {
+		tst.Errorf("Got distance(%.2f) <= %.2f  Want distance(%.2f) > %.2f", t, elevation, t, elevation)
+	}
+}

@@ -64,9 +64,3 @@ func TestIntegration(test *testing.T) {
 	}
 
 }
-
-// func TestSorting(t *testing.T) {
-//     numbers := []float64{4.0, 8.0, 2.0, 10.0}
-//     sorted := sort.Float64s(numbers)
-//     fmt.Println(sorted)
-// }

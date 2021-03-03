@@ -4,6 +4,36 @@ import (
 	. "fmt"
 )
 
+func ExampleRigidBody_GravityForce() {
+	b := RigidBody{Mass: 3}
+	Println(b.GravityForce(), "Newton")
+
+	b.Mass = 6
+	Println(b.GravityForce(), "Newton")
+
+	b.Mass = 1
+	Println(b.GravityForce(), "Newton")
+	// Output:
+	// -29.41995 Newton
+	// -58.8399 Newton
+	// -9.80665 Newton
+}
+
+func ExampleRigidBody_Acceleration() {
+	b := RigidBody{Mass: 2, Force: 6}
+	Println(b.Acceleration())
+
+	b.Mass = 6
+	Println(b.Acceleration())
+
+	b.Force = 12
+	Println(b.Acceleration())
+	// Output:
+	// 3
+	// 1
+	// 2
+}
+
 func ExampleDistance() {
 	distance := Distance(0, 0, 3)
 	d := distance(2)
