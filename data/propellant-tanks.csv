@@ -1,0 +1,11 @@
+name,company,total_mass,dry_mass,diameter,length
+FL-T100,Kerbal,0.56,0.06,1.25,0.8
+FL-T200,Kerbal,1.13,0.13,1.25,1.6
+FL-T400,Kerbal,2.25,0.25,1.25,3.2
+F9 1st stage,SpaceX,418.8,23.1,3.66,41.2
+F9 2nd stage,SpaceX,96.57,3.9,3.66,13.8
+F1 1st stage,SpaceX,41.1,2.1,1.7,16
+F1 2nd stage,SpaceX,4.8,0.8,1.7,5.2
+Electron 1st stage,Rocket Lab,10.2,0.95,1.2,12.1
+Electron 2nd stage,Rocket Lab,2.3,0.25,1.2,2.4
+Electron 3rd stage,Rocket Lab,0,0,1.2,0.5
