@@ -59,3 +59,22 @@ func ExampleNullTank() {
 	// true
 	// 0
 }
+
+func ExampleLoadTanks() {
+	tanks, _ := LoadTanks()
+	for k, v := range tanks {
+		fmt.Printf("%v has mass %.1f\n", k, v.Mass())
+	}
+
+	// Unordered Output:
+	// FL-T400 has mass 2.2
+	// F9 2nd stage has mass 96.6
+	// F1 2nd stage has mass 4.8
+	// FL-T100 has mass 0.6
+	// FL-T200 has mass 1.1
+	// Electron 1st stage has mass 10.2
+	// Electron 2nd stage has mass 2.3
+	// Electron 3rd stage has mass 0.0
+	// F9 1st stage has mass 418.8
+	// F1 1st stage has mass 41.1
+}
