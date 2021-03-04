@@ -6,7 +6,7 @@ import "fmt"
 // thrust gets combined but specific impulse (Isp) stays the same.
 func ExampleCluster() {
 	var engine Engine = &Rutherford{}
-	var cluster Engine = &engine.Cluster{engine, 9}
+	var cluster Engine = &Cluster{engine, 9}
 
 	fmt.Println(engine.Mass(), cluster.Mass())
 	fmt.Println(engine.Thrust(), cluster.Thrust())
@@ -16,4 +16,14 @@ func ExampleCluster() {
 	// 35 315
 	// 25000 225000
 	// 311 311
+}
+
+func ExampleMerlin() {
+	var engine Engine = &Merlin{}
+	fmt.Println(engine.Mass())
+	fmt.Println(engine.Thrust())
+
+	// Output:
+	// 470
+	// 845000
 }
