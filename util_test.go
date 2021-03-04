@@ -1,13 +1,14 @@
 package rocket
 
 import (
-	. "github.com/ordovician/rocket/part"
+	. "github.com/ordovician/rocket/engine"
 	. "github.com/ordovician/rocket/physics"
+	. "github.com/ordovician/rocket/tank"
 )
 
 func newElectronSpaceVehicle() *SpaceVehicle {
 	rutherford := Rutherford{}
-	boosterEngines := EngineCluster{Engine: rutherford, Count: 9}
+	boosterEngines := Cluster{Engine: rutherford, Count: 9}
 
 	craft := NewSpaceCraft(nil, NewMediumTank(), rutherford)
 
@@ -21,7 +22,7 @@ func newElectronSpaceVehicle() *SpaceVehicle {
 }
 
 func launchSpaceShip(mass Kg, thrust Newton, Isp float64) (t, elevation float64, propellant Kg) {
-	engine := NewFlexiEngine(0.0, thrust, Isp)
+	engine := NewCustomEngine(0.0, thrust, Isp)
 	tank := NewFlexiTank(0.0, mass)
 	probe := NewProbe(0.001)
 

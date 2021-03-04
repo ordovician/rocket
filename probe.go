@@ -1,4 +1,4 @@
-package part
+package rocket
 
 import (
 	. "github.com/ordovician/rocket/physics"

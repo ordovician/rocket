@@ -5,8 +5,9 @@ import (
 
 	"math"
 
-	. "github.com/ordovician/rocket/part"
+	// . "github.com/ordovician/rocket/engine"
 	. "github.com/ordovician/rocket/physics"
+	. "github.com/ordovician/rocket/tank"
 )
 
 func TestStageSeparation(tst *testing.T) {

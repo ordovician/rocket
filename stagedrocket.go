@@ -1,8 +1,9 @@
 package rocket
 
 import (
-	. "github.com/ordovician/rocket/part"
+	. "github.com/ordovician/rocket/engine"
 	. "github.com/ordovician/rocket/physics"
+	. "github.com/ordovician/rocket/tank"
 )
 
 // MultiStaged rocket means  a rocket made up of multiple stages. Thus the payload can be another rocket.

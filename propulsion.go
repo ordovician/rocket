@@ -1,8 +1,9 @@
 package rocket
 
 import (
-	. "github.com/ordovician/rocket/part"
+	. "github.com/ordovician/rocket/engine"
 	. "github.com/ordovician/rocket/physics"
+	. "github.com/ordovician/rocket/tank"
 )
 
 // The propulsion element of a rocket. The Engine decides how much propellant

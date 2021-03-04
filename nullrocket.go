@@ -1,8 +1,8 @@
 package rocket
 
 import (
-	. "github.com/ordovician/rocket/part"
 	. "github.com/ordovician/rocket/physics"
+	. "github.com/ordovician/rocket/tank"
 )
 
 // A space craft is what you would think of as a space ship.

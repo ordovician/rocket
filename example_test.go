@@ -2,8 +2,8 @@ package rocket
 
 import (
 	"fmt"
-
-	. "github.com/ordovician/rocket/part"
+	. "github.com/ordovician/rocket/engine"
+	. "github.com/ordovician/rocket/tank"
 	// . "github.com/ordovician/rocket/physics"
 )
 
@@ -12,7 +12,7 @@ import (
 // the bottom part thus becomes the remaining part, and its engine provides the new thrust.
 func ExampleMultiStaged_StageSeparate() {
 	rutherford := Rutherford{}
-	boosterEngines := EngineCluster{rutherford, 9}
+	boosterEngines := Cluster{rutherford, 9}
 
 	booster := NewMultiStaged(
 		NewSpaceCraft(nil, NewMediumTank(), rutherford),
@@ -41,7 +41,7 @@ func ExampleMultiStaged_StageSeparate() {
 // ground at each stage.
 func ExampleSpaceVehicle_Launch() {
 	rutherford := Rutherford{}
-	boosterEngines := EngineCluster{rutherford, 9}
+	boosterEngines := Cluster{rutherford, 9}
 
 	booster := NewMultiStaged(
 		NewSpaceCraft(nil, NewMediumTank(), rutherford),
@@ -83,7 +83,7 @@ func ExampleSpaceVehicle_Launch() {
 
 func ExampleTankPropellant() {
 	rutherford := Rutherford{}
-	boosterEngines := EngineCluster{rutherford, 9}
+	boosterEngines := Cluster{rutherford, 9}
 
 	craft := NewSpaceCraft(nil, NewMediumTank(), rutherford)
 

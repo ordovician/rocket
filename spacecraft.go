@@ -1,20 +1,21 @@
 package rocket
 
 import (
-	. "github.com/ordovician/rocket/part"
+	. "github.com/ordovician/rocket/engine"
 	. "github.com/ordovician/rocket/physics"
+	. "github.com/ordovician/rocket/tank"
 )
 
 // A space craft is what you would think of as a space ship.
 // It is the part of a multistaged rocket which will be navigating
 // around in outer space.
 type SpaceCraft struct {
-	Payload Part
+	Payload
 	Propulsion
 }
 
 // Create a new space craft with given payload tank and engine
-func NewSpaceCraft(payload Part, tank Tank, engine Engine) *SpaceCraft {
+func NewSpaceCraft(payload Payload, tank Tank, engine Engine) *SpaceCraft {
 	return &SpaceCraft{
 		payload,
 		Propulsion{tank, engine},
