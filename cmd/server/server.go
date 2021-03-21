@@ -37,7 +37,7 @@ func handleTanks(w http.ResponseWriter, r *http.Request) {
 	)
 	encoder.SetIndent("", "    ")
 
-	tanks, err = tank.LoadTanks("data/tanks/propellant-tanks.csv")
+	tanks, err = tank.LoadTanks("")
 	if err != nil {
 		log.Fatal("Could not serve info about tanks: ", err)
 	}
