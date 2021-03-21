@@ -1,22 +1,33 @@
 package engine
 
 import (
+	"embed"
 	"encoding/csv"
+	"io/fs"
 	"log"
 	"os"
 	"strconv"
-	// "strings"
 
 	. "github.com/ordovician/rocket/physics"
 )
 
 var debug *log.Logger = log.New(os.Stdout, "", 0)
 
-// LoadTanks load information about propellant tanks into a dictionary.
-func LoadEngines() (map[string]Engine, error) {
+//go:embed rocket-engines.csv
+var storage embed.FS
 
-	filename := "../data/rocket-engines.csv"
-	file, err := os.Open(filename)
+// LoadTanks load information about propellant tanks into a dictionary.
+func LoadEngines(filename string) (map[string]Engine, error) {
+	var (
+		file fs.File
+		err  error
+	)
+
+	if filename == "" {
+		file, err = storage.Open("rocket-engines.csv")
+	} else {
+		file, err = os.Open(filename)
+	}
 
 	if err != nil {
 		debug.Println("Failed to to open ", filename, ": ", err)

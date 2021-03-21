@@ -1,6 +1,8 @@
 package tank
 
 import (
+	"embed"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -11,17 +13,25 @@ import (
 
 var debug *log.Logger = log.New(os.Stdout, "", 0)
 
-// LoadTanks load information about propellant tanks into a dictionary.
-func LoadTanks() (map[string]Tank, error) {
+//go:embed propellant-tanks.csv
+var fs embed.FS
 
-	filename := "../data/propellant-tanks.csv"
-	data, err := os.ReadFile(filename)
+// LoadTanks load information about propellant tanks into a dictionary.
+// If the filepath is empty then we will attempt to load from a default location
+func LoadTanks(path string) (map[string]Tank, error) {
+	var (
+		data []byte
+		err  error
+	)
+
+	if path != "" {
+		data, err = fs.ReadFile("propellant-tanks.csv")
+	} else {
+		data, err = os.ReadFile(path)
+	}
 
 	if err != nil {
-		debug.Println("Failed to to open ", filename, ": ", err)
-		dir, _ := os.Getwd()
-		debug.Println("Currently in directory: ", dir)
-		return nil, err
+		return nil, fmt.Errorf("Unsable to open propellant tanks file. Reason: %w", err)
 	}
 
 	str := string(data)

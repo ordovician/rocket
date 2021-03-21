@@ -61,7 +61,7 @@ func ExampleNullTank() {
 }
 
 func ExampleLoadTanks() {
-	tanks, _ := LoadTanks()
+	tanks, _ := LoadTanks("")
 	for k, v := range tanks {
 		fmt.Printf("%v has mass %.1f\n", k, v.Mass())
 	}
