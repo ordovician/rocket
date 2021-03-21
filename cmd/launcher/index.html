@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Launch Rocket</h1>
+    <p>Configure a rocket to be launched and see how far ut up goes. Here are some of the important concepts and how they impact elevation:</p>
+    <ul>
+        <li><b>Isp</b> - Specific impulse is a measure of fuel efficiency.
+        Higher means better fuel efficiency.</li>
+        <li><b>Thrust</b> - The power of the engine. Similar to horsepower of a gasoline engine. 
+            If thrust is too low, you will not be able to counter gravity.</li>
+    </ul>
+
+    <form action="/action_page.php">
+        <h2>First Stage</h2>
+        <label for="engines">Rocket Engine:</label>
+        <select id="engines" name="engines">
+          <option value="Rutherford">Rutherford</option>
+          <option value="RD-180">RD-180</option>
+          <option value="Merlin1D" selected>Merlin1D</option>
+          <option value="Custom">Custom</option>
+        </select>
+
+        <label for="enginecount">Count:</label>
+        <input type="number" id="enginecount" name="enginecount"><br>
+
+        <br>
+        <label for="tanks">Propellant Tank:</label>
+        <select id="tanks" name="tanks">
+          <option value="Falcon9-S1">Falcon9-S1</option>
+          <option value="Falcon9-S2">Falcon9-S2</option>
+          <option value="Electron-S1" selected>Electron-S1</option>
+          <option value="Electron-S2" selected>Electron-S2</option>
+
+          <option value="Custom">Custom</option>
+        </select>
+
+
+
+        <h2>Second Stage</h2>
+
+        <input type="submit" value="Launch Rocket">
+      </form>
+
+</body>
+</html>
