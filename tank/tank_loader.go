@@ -24,7 +24,7 @@ func LoadTanks(path string) (map[string]Tank, error) {
 		err  error
 	)
 
-	if path != "" {
+	if path == "" {
 		data, err = fs.ReadFile("propellant-tanks.csv")
 	} else {
 		data, err = os.ReadFile(path)
@@ -55,9 +55,11 @@ func LoadTanks(path string) (map[string]Tank, error) {
 			return nil, err
 		}
 
+		// multiply by 1000 to convert from metric tonnes to Kg as expected
+		// by tank struct
 		tank := FlexiTank{
-			DryMass:   Kg(drymass),
-			TotalMass: Kg(totalMass),
+			DryMass:   Kg(drymass * 1000),
+			TotalMass: Kg(totalMass * 1000),
 		}
 
 		name := parts[0]

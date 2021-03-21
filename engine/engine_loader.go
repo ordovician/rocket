@@ -38,31 +38,33 @@ func LoadEngines(filename string) (map[string]Engine, error) {
 
 	defer file.Close()
 
-	lines, err := csv.NewReader(file).ReadAll()
+	records, err := csv.NewReader(file).ReadAll()
 	if err != nil {
 		debug.Println("Failed to read CSV file: ", err)
 		return nil, err
 	}
 
 	engines := make(map[string]Engine)
-	for _, line := range lines[1:] {
-		name := line[0]
-		mass, err := strconv.ParseFloat(line[2], 64)
+	for _, record := range records[1:] {
+		name := record[0]
+		mass, err := strconv.ParseFloat(record[2], 64)
 		if err != err {
 			return nil, err
 		}
 
-		thrust, err := strconv.ParseFloat(line[3], 64)
+		thrust, err := strconv.ParseFloat(record[3], 64)
 		if err != err {
 			return nil, err
 		}
 
-		isp, err := strconv.ParseFloat(line[6], 64)
+		isp, err := strconv.ParseFloat(record[6], 64)
 		if err != err {
 			return nil, err
 		}
 
-		engine := NewCustomEngine(Kg(mass), Newton(thrust), isp)
+		// Values read are in metric tonnes and kilo Newton so we need to convert
+		// to SI units expected by the Engine struct
+		engine := NewCustomEngine(Kg(mass*1000), Newton(thrust*1000), isp)
 		engines[name] = engine
 	}
 

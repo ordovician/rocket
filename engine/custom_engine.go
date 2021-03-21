@@ -1,12 +1,36 @@
 package engine
 
-import . "github.com/ordovician/rocket/physics"
+import (
+	"encoding/json"
+
+	. "github.com/ordovician/rocket/physics"
+)
 
 // A rocket engine you can configure the parameters of yourself
 type CustomEngine struct {
 	mass   Kg
 	thrust Newton
 	isp    float64
+}
+
+// MarshalJSON implements the Marshaler interface to allow custom serialization
+// of a data structure. In this case CustomEngine has private fields and
+// thus cannot be automatically serialized and deserialized
+func (engine *CustomEngine) MarshalJSON() ([]byte, error) {
+	data, err := json.Marshal(struct {
+		Mass   Kg
+		Thrust Newton
+		Isp    float64
+	}{
+		Mass:   engine.mass,
+		Thrust: engine.thrust,
+		Isp:    engine.isp,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }
 
 // The mass of the rocket engine.
