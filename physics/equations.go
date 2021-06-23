@@ -6,9 +6,8 @@ type Newton float64
 // Standard measurement unit for mass, a kilogram.
 type Kg float64
 
-const (
-	Gravity = 9.80665 // Acceleration of Gravity on Earth in meters / seconds squared
-)
+// Acceleration of Gravity on Earth in meters / seconds squared
+const Gravity = 9.80665
 
 // Calculates the exhaust velocity `vₑ` of a rocket engine, by taking specific impulse as input.
 func ExhaustVelocity(Isp float64) float64 {
