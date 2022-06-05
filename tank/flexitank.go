@@ -41,7 +41,7 @@ func (tank *FlexiTank) Mass() Kg {
 
 // Creates a tank with given dry mass and total mass, and fills it up to the max.
 // Dry mass is the mass of an empty tank.
-func NewFlexiTank(drymass Kg, totalmass Kg) *FlexiTank {
+func NewFlexiTank(drymass, totalmass Kg) *FlexiTank {
 	tank := FlexiTank{drymass, totalmass, 0}
 	tank.Refill()
 	return &tank
