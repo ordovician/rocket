@@ -82,7 +82,7 @@ func ExampleSpaceVehicle_Launch() {
 	//   Propellant left =  0 Kg
 }
 
-func ExampleTankPropellant() {
+func ExampleTank_Propellant() {
 	rutherford := Rutherford{}
 	boosterEngines := Cluster{rutherford, 9}
 
